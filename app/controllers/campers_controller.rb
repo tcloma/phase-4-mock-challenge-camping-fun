@@ -5,7 +5,7 @@ class CampersController < ApplicationController
 
   def show
     camper = Camper.find_by(id: params[:id])
-    if !camper.is_a?(NilClass)
+    if !camper.nil?
       render json: camper, serializer: CamperWithActivitiesSerializer
     else
       render json: { error: "Camper not found" }
@@ -14,7 +14,11 @@ class CampersController < ApplicationController
 
   def create
     camper = Camper.create!(camper_params)
-    render json: camper
+    if !camper.nil?
+      render json: camper
+    else
+      render json: { errors: camper.errors.full_messages }
+    end
   end
 
   private

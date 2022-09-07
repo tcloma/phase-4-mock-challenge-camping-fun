@@ -2,7 +2,7 @@ class SignupsController < ApplicationController
 
   def create
     signup = Signup.new(activity_params)
-    if !signup.is_a?(NilClass)
+    if !signup.nil?
       signup.save
       render json: signup.activity
     else

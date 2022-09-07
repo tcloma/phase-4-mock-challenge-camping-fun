@@ -6,7 +6,7 @@ class ActivitiesController < ApplicationController
 
   def destroy
     activity = Activity.find_by(id: params[:id])
-    if !activity.is_a?(NilClass)
+    if !activity.nil?
       activity.signups.destroy_all
       activity.destroy
     else
